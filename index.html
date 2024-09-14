@@ -582,7 +582,7 @@
         <div class="row justify-content-center"  id="counter-section">
             <div class="col-lg-2 col-md-3 col-sm-6">
                 <div class="counter-box">
-                    <h2 class="count" data-count="4123">0</h2>
+                    <h2 class="count" data-count="4000">0</h2>
                     <p>Admissions till now</p>
                 </div>
             </div>
@@ -591,7 +591,7 @@
             </div>
             <div class="col-lg-2 col-md-3 col-sm-6">
                 <div class="counter-box">
-                    <h2 class="count" data-count="123">0</h2>
+                    <h2 class="count" data-count="150">0</h2>
                     <p>Faculties</p>
                 </div>
             </div>
@@ -600,7 +600,7 @@
             </div>
             <div class="col-lg-2 col-md-3 col-sm-6">
                 <div class="counter-box">
-                    <h2 class="count" data-count="1556">0</h2>
+                    <h2 class="count" data-count="3000">0</h2>
                     <p>Successful Students</p>
                 </div>
             </div>
@@ -609,7 +609,7 @@
             </div>
             <div class="col-lg-2 col-md-3 col-sm-6">
                 <div class="counter-box">
-                    <h2 class="count" data-count="234">0</h2>
+                    <h2 class="count" data-count="500">0</h2>
                     <p>Academic Impressions</p>
                 </div>
             </div>
@@ -838,40 +838,40 @@
     <script>
 
         document.addEventListener('DOMContentLoaded', function () {
-            const counters = document.querySelectorAll('.count');
-            let hasRun = false;
+    const counters = document.querySelectorAll('.count');
+    let hasRun = false;
 
-            const countUp = (counter) => {
-                const updateCount = () => {
-                    const target = +counter.getAttribute('data-count');
-                    const count = +counter.innerText;
-                    const increment = target / 200;
+    const countUp = (counter) => {
+        const updateCount = () => {
+            const target = +counter.getAttribute('data-count');
+            const count = +counter.innerText;
+            const increment = target / 200;
 
-                    if (count < target) {
-                        counter.innerText = Math.ceil(count + increment);
-                        setTimeout(updateCount, 1);
-                    } else {
-                        counter.innerText = target;
-                    }
-                };
-                updateCount();
-            };
+            if (count < target) {
+                counter.innerText = Math.ceil(count + increment);
+                setTimeout(updateCount, 5); // Adjust the speed of the counting
+            } else {
+                counter.innerText = target + '+'; // Add the '+' symbol when counting is complete
+            }
+        };
+        updateCount();
+    };
 
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && !hasRun) {
-                        counters.forEach(counter => countUp(counter));
-                        hasRun = true;
-                        observer.disconnect();  // Stop observing once the animation has started
-                    }
-                });
-            }, {
-                threshold: 0.5 // Trigger when 50% of the section is visible
-            });
-
-            const counterSection = document.getElementById('counter-section');
-            observer.observe(counterSection);
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !hasRun) {
+                counters.forEach(counter => countUp(counter));
+                hasRun = true;
+                observer.disconnect();  // Stop observing once the animation has started
+            }
         });
+    }, {
+        threshold: 0.5 // Trigger when 50% of the section is visible
+    });
+
+    const counterSection = document.getElementById('counter-section');
+    observer.observe(counterSection);
+});
 
 
 
